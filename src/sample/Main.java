@@ -18,6 +18,7 @@ public class Main extends Application {
         primaryStage.setMinWidth(1300);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        // dodałem koment poważna zmiana trzeba dać na gita
     }
 
 
