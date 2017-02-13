@@ -4,10 +4,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.text.TextAlignment;
 
+import java.io.Serializable;
+
 /**
  * Created by Jacek on 03.02.2017.
  */
-public class MyLabel extends Label {
+public class MyLabel extends Label implements Serializable {
     private static int isColored = 0;
     public boolean isSelected = false;
     private String backupStyle;

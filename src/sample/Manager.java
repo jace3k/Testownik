@@ -5,12 +5,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Jacek on 13.02.2017.
  */
-public class Manager {
+public class Manager implements Serializable {
     public final static String START_WINDOW = "testownikStart.fxml";
     public final static String QUEST_WINDOW = "testownikQuest.fxml";
     public final static String END_WINDOW = "testownikEnd.fxml";
@@ -18,10 +19,11 @@ public class Manager {
     private int questShowCount;
     private int addAfterWrongCount;
     private String totalTime;
-    private Stage stage;
+    private transient Stage stage;
 
     private ArrayList<Quest> base;
     private int baseCounter;
+    private int learned;
 
     private static Manager ourInstance = new Manager();
     private Manager() {
@@ -39,7 +41,19 @@ public class Manager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        /*
+        Node node=(Node) .getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("testownikQuest.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
     }
 
     public void setQuestShowCount(int questShowCount) {
@@ -48,10 +62,6 @@ public class Manager {
 
     public void setAddAfterWrongCount(int addAfterWrongCount) {
         this.addAfterWrongCount = addAfterWrongCount;
-    }
-
-    public int getQuestShowCount() {
-        return questShowCount;
     }
 
     public int getAddAfterWrongCount() {
@@ -82,5 +92,19 @@ public class Manager {
         QuestReader qr = new QuestReader(questShowCount);
         base = qr.readBase("baza");
         baseCounter = qr.getBaseCounter();
+    }
+
+    public void serialize() throws IOException {
+        SerializationUi.serialize(this,"sav.sav");
+    }
+    public static void deserialize() throws IOException, ClassNotFoundException {
+        ourInstance = (Manager) SerializationUi.deserialize("sav.sav");
+    }
+
+    public int getLearned() {
+        return learned;
+    }
+    public void incLearned() {
+        learned++;
     }
 }

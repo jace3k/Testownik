@@ -5,13 +5,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
  * Created by Jacek on 04.02.2017.
  */
-public class EndController implements Initializable {
+public class EndController implements Initializable, Serializable {
     @FXML
     private Button endButton;
     @FXML

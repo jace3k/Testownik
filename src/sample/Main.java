@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import java.io.Serializable;
+
+public class Main extends Application implements Serializable {
 
     @Override
     public void start(Stage primaryStage) throws Exception{

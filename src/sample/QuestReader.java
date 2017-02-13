@@ -1,12 +1,13 @@
 package sample;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Jacek on 13.02.2017.
  */
-public class QuestReader {
+public class QuestReader implements Serializable {
 
     private int baseCounter;
     private int questCounter;
@@ -16,7 +17,7 @@ public class QuestReader {
 
 
     public ArrayList<Quest> readBase(String folderName) {
-        ArrayList<Quest> base = new ArrayList<>();;
+        ArrayList<Quest> base = new ArrayList<>();
         File baza = new File(folderName);
         if(baza.isDirectory()) {
             for(File f : baza.listFiles()) {

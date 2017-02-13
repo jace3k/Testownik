@@ -1,9 +1,11 @@
 package sample;
 
+import java.io.Serializable;
+
 /**
  * Created by Jacek on 13.02.2017.
  */
-public class Answer {
+public class Answer implements Serializable {
     private String answer;
     private boolean isGood;
 

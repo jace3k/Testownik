@@ -13,17 +13,18 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-public class QuestController implements Initializable {
+public class QuestController implements Initializable, Serializable {
 
     private ArrayList<Quest> base = Manager.getInstance().getBase();
     private int actualQuest;
-    private int learned = 0;
 
     // Layouty ///////////////
     @FXML
@@ -65,10 +66,11 @@ public class QuestController implements Initializable {
             System.exit(0);
         });
         check.setOnAction(event -> {
+            System.out.println("Nacisnąłeś sprawdz");
             if(!base.isEmpty()) checkIt();
-            baseCounterLabel.setText(base.size()+ " / " + Manager.getInstance().getBaseCounter()+"");
+            baseCounterLabel.setText(Manager.getInstance().getBaseCounter()+"");
             if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
-            double calculate = (double) learned/(Manager.getInstance().getBaseCounter());
+            double calculate = (double) (Manager.getInstance().getLearned())/(Manager.getInstance().getBaseCounter());
             progress.setProgress(calculate);
             next.setDisable(false);
             check.setDisable(true);
@@ -78,6 +80,12 @@ public class QuestController implements Initializable {
         });
 
         next.setOnAction((ActionEvent event) -> {
+            System.out.println("Nacisnąłeś next");
+            if(base.get(actualQuest).getShowCount() == 0) {
+                base.remove(actualQuest);
+                Manager.getInstance().incLearned();
+                learnedLabel.setText(Manager.getInstance().getLearned()+"");
+            }
             showQuestion();
             if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
             next.setDisable(true);
@@ -90,13 +98,21 @@ public class QuestController implements Initializable {
                 Manager.getInstance().setTotalTime(time.getText());
                 Manager.getInstance().setActiveWindow(Manager.END_WINDOW);
             }
+
+
+
         });
 
         // LABELE ///////////////////////////////////////////////////
-        baseCounterLabel.setText(base.size()+ " / " + Manager.getInstance().getBaseCounter()+"");
+        baseCounterLabel.setText(Manager.getInstance().getBaseCounter()+"");
         if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
-        displayTime();
 
+        learnedLabel.setText(Manager.getInstance().getLearned()+"");
+
+        double calculate = (double) (Manager.getInstance().getLearned())/(Manager.getInstance().getBaseCounter());
+        progress.setProgress(calculate);
+
+        displayTime();
 
         showQuestion();
     }
@@ -105,44 +121,43 @@ public class QuestController implements Initializable {
         int i = 0;
         boolean youFail = false;
         for(Answer a : base.get(actualQuest).getAnwsers()) {
-            MyLabel mylabel = ((MyLabel) labels.getChildren().get(i));
-            if(a.isGood()) mylabel.setCorrect();
-            i++;
+            try {
+                MyLabel mylabel = ((MyLabel) labels.getChildren().get(i));
+                if (a.isGood()) mylabel.setCorrect();
+                if (!a.isGood() && mylabel.isSelected()) youFail = true;
+                if (a.isGood() && !mylabel.isSelected()) youFail = true;
+                i++;
+            } catch (Exception e) {
+                System.out.println("No skończyła sie tablica.");
+            }
         }
-        i = 0;
-        for(Answer a : base.get(actualQuest).getAnwsers()) {
-            MyLabel mylabel = ((MyLabel) labels.getChildren().get(i));
-            if(!a.isGood() && mylabel.isSelected()) youFail = true;
-            else if(a.isGood() && !mylabel.isSelected()) youFail = true;
-            i++;
-        }
-
         if(!youFail) {
             base.get(actualQuest).decShowCount();
         } else base.get(actualQuest).incShowCount(Manager.getInstance().getAddAfterWrongCount());
-        if(base.get(actualQuest).getShowCount() == 0) {
-            base.remove(actualQuest);
-            learned++;
-            learnedLabel.setText(learned+"");
-        }
     }
 
     private void showQuestion() {
         Random r = new Random();
         if(base.size()==1) actualQuest = 0;
         else if(base.isEmpty()) System.out.println("Baza jest pusta");
-        else actualQuest = r.nextInt(Math.abs(base.size()-1));
+        else actualQuest = r.nextInt(Math.abs(base.size()));
 
         if(!base.isEmpty()) {
             question.setText(base.get(actualQuest).getQuestion());
             labels.getChildren().removeAll(labels.getChildren());
             for (Answer a : base.get(actualQuest).getAnwsers()) labels.getChildren().add(new MyLabel(a.getAnswer()));
         }
-        baseCounterLabel.setText(base.size()+ " / " + Manager.getInstance().getBaseCounter()+"");
+        baseCounterLabel.setText(Manager.getInstance().getBaseCounter()+"");
     }
 
     private void saveProgress() {
-        // zapisywanie postępu
+        Manager.getInstance().setTotalTime(time.getText());
+        try {
+            Manager.getInstance().serialize();
+            System.out.println("Zapisano.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void displayTime() {

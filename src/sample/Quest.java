@@ -1,15 +1,12 @@
 package sample;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
  * Created by Jacek on 03.02.2017.
  */
-public class Quest {
+public class Quest implements Serializable {
     private String firstLine;
     private String question;
     private ArrayList<Answer> answers = new ArrayList<>();
