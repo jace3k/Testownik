@@ -80,7 +80,7 @@ public class Manager {
 
     public void read() {
         QuestReader qr = new QuestReader(questShowCount);
-        base = qr.readBase("src/sample/baza");
+        base = qr.readBase("baza");
         baseCounter = qr.getBaseCounter();
     }
 }
