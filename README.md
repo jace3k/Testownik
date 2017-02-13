@@ -1,3 +1,3 @@
 # Testownik
 
-Stworzony na JavaFX, działa ale nie liczy
+Stworzony na JavaFX, działa
