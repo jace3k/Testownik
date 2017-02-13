@@ -65,9 +65,9 @@ public class QuestController implements Initializable {
             System.exit(0);
         });
         check.setOnAction(event -> {
-            checkIt();
+            if(!base.isEmpty()) checkIt();
             baseCounterLabel.setText(base.size()+ " / " + Manager.getInstance().getBaseCounter()+"");
-            showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
+            if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
             double calculate = (double) learned/(Manager.getInstance().getBaseCounter());
             progress.setProgress(calculate);
             next.setDisable(false);
@@ -79,7 +79,7 @@ public class QuestController implements Initializable {
 
         next.setOnAction((ActionEvent event) -> {
             showQuestion();
-            showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
+            if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
             next.setDisable(true);
             check.setDisable(false);
             check.setDefaultButton(true);
@@ -94,7 +94,7 @@ public class QuestController implements Initializable {
 
         // LABELE ///////////////////////////////////////////////////
         baseCounterLabel.setText(base.size()+ " / " + Manager.getInstance().getBaseCounter()+"");
-        showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
+        if(!base.isEmpty()) showCountLabel.setText(base.get(actualQuest).getShowCount()+"");
         displayTime();
 
 

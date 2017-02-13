@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <center>
       <Label alignment="TOP_LEFT" text="Testownik" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -25,17 +25,17 @@
             </ToolBar>
          </left>
          <right>
-            <ToolBar BorderPane.alignment="CENTER">
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
                <items>
-                  <Label alignment="TOP_RIGHT" text="Ilość wystąpień pytania:" />
-                  <TextField fx:id="questCounter" alignment="CENTER_RIGHT" prefWidth="50.0" text="2" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Zwiększaj wystąpienia po błędzie o:" textAlignment="RIGHT" />
                   <TextField fx:id="questAgain" alignment="CENTER_RIGHT" prefWidth="50.0" text="1" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Zwiększaj wystąpienia po błędzie o:" textAlignment="RIGHT" />
+                  <TextField fx:id="questCounter" alignment="CENTER_RIGHT" prefWidth="50.0" text="2" />
+                  <Label alignment="TOP_RIGHT" text="Ilość wystąpień pytania:" />
                </items>
             </ToolBar>
          </right>
          <center>
-            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ToolBar BorderPane.alignment="CENTER">
                <items>
                   <Button fx:id="load" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Wczytaj" />
                   <Button fx:id="exit" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Wyjście" />
