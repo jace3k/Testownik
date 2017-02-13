@@ -11,6 +11,7 @@ public class MyLabel extends Label {
     private static int isColored = 0;
     public boolean isSelected = false;
     private String backupStyle;
+
     public MyLabel(String a) {
         super(a);
         this.setPrefHeight(80);
@@ -50,5 +51,11 @@ public class MyLabel extends Label {
         isSelected = false;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
 
+    public void setCorrect() {
+        this.setStyle("-fx-background-color: #78ff4c");
+    }
 }

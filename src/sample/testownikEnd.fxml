@@ -6,16 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:controller="sample.EndController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #e5e5e5;" BorderPane.alignment="CENTER">
-        <items>
-          <Button fx:id="endButton" mnemonicParsing="false" text="Wyjdź" />
-            <Label text="Czas całkowity:" />
-            <Label fx:id="endTime" text="1:44:30" />
-        </items>
-      </ToolBar>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.EndController">
    <center>
       <Label text="Koniec!" BorderPane.alignment="CENTER">
          <font>
@@ -23,4 +14,14 @@
          </font>
       </Label>
    </center>
+   <bottom>
+      <ToolBar nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="endButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Wyjdź" />
+            <Button fx:id="restart" mnemonicParsing="false" text="Restart" />
+            <Label fx:id="endTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="1:44:30" />
+            <Label alignment="CENTER_RIGHT" text="Czas całkowity:" />
+        </items>
+      </ToolBar>
+   </bottom>
 </BorderPane>

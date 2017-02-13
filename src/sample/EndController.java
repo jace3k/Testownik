@@ -16,13 +16,14 @@ public class EndController implements Initializable {
     private Button endButton;
     @FXML
     private Label endTime;
+    @FXML
+    private Button restart;
 
-    public static String temp;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        endTime.setText(temp);
+        endTime.setText(Manager.getInstance().getTotalTime());
         endButton.setDefaultButton(true);
         endButton.setOnAction(event -> System.exit(0));
-
+        restart.setOnAction(event -> Manager.getInstance().setActiveWindow(Manager.START_WINDOW));
     }
 }

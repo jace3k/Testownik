@@ -12,50 +12,53 @@ import java.util.ArrayList;
 public class Quest {
     private String firstLine;
     private String question;
-    private ArrayList<String> anwsers = new ArrayList<>();
-    private ArrayList<Integer> anwsersGood = new ArrayList<>();
-    private boolean done = false;
+    private ArrayList<Answer> answers = new ArrayList<>();
+    private int showCount;
 
-    public Quest(File f) {
+    public Quest(File f, int qc) {
+        showCount = qc;
         String currentLine;
         try {
-
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), "ISO-8859-2"));
 
-            //BufferedReader br = new BufferedReader(new FileReader(f));
+            firstLine = br.readLine();
+            question = br.readLine();
+            int i = 1;
             while((currentLine = br.readLine()) != null ) {
-                //currentLine = new String(currentLine.getBytes(), "UTF-8");
-                anwsers.add(currentLine);
+                answers.add(new Answer(currentLine,isAnswerGood(i)));
+                i++;
             }
-            firstLine = anwsers.get(0);
-            anwsers.remove(0);
-            question = anwsers.get(0);
-            anwsers.remove(0);
-            setAnwsersGood();
-            done = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void setAnwsersGood() {
-        for(int i = 1; i < firstLine.length(); i++) {
-            anwsersGood.add(Integer.parseInt(firstLine.charAt(i)+""));
+    private boolean isAnswerGood(int i) {
+        try {
+            return firstLine.charAt(i) == '1';
+        } catch (StringIndexOutOfBoundsException ex) {
+            return false;
         }
     }
+
     public String getQuestion() {
         return question;
     }
 
-    public String getAnswerAt(int i) {
-        return anwsers.get(i);
-    }
-    public int getAnswerGoodAt(int i) {
-        return anwsersGood.get(i);
+    public ArrayList<Answer> getAnwsers() {
+        return answers;
     }
 
-    public int alength() {
-        return anwsersGood.size();
+    public int getShowCount() {
+        return showCount;
+    }
+
+    public void decShowCount() {
+        this.showCount--;
+    }
+
+    public void incShowCount(int more) {
+        this.showCount+=more;
     }
 
 }

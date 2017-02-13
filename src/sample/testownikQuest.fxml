@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.QuestController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.QuestController">
    <top>
-      <HBox alignment="CENTER" prefHeight="154.0" prefWidth="1280.0" style="-fx-background-color: #e5e5e5;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="154.0" style="-fx-background-color: #e5e5e5;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="question" text="Twoje pytania nie wczytały się. Umieść folder &quot;baza&quot; obok testownika." textAlignment="CENTER">
                <font>
@@ -21,34 +21,49 @@
          </children>
       </HBox>
    </top>
-   <bottom>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #e5e5e5;" BorderPane.alignment="CENTER">
-        <items>
-            <Button fx:id="exit" mnemonicParsing="false" prefWidth="120.0" text="Wyjdź" />
-            <Button fx:id="saveExit" mnemonicParsing="false" prefHeight="31.0" prefWidth="120.0" text="Zapisz i wyjdź" />
-            <Label prefHeight="21.0" prefWidth="64.0" text="Postęp:">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <ProgressBar fx:id="progress" prefHeight="23.0" prefWidth="559.0" progress="0.0" />
-            <Label fx:id="time" prefHeight="21.0" prefWidth="72.0" text="00:00:00" />
-            <Label prefHeight="21.0" prefWidth="83.0" text="Ilość pytań:" textAlignment="CENTER">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-            <Label fx:id="baseCounter" prefHeight="21.0" prefWidth="25.0" text="0" />
-            <Button fx:id="check" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Sprawdź" />
-            <Button fx:id="next" mnemonicParsing="false" prefWidth="85.0" text="Dalej" />
-        </items>
-      </ToolBar>
-   </bottom>
    <center>
-      <VBox fx:id="labels" alignment="TOP_CENTER" prefHeight="611.0" prefWidth="1280.0" BorderPane.alignment="TOP_CENTER">
+      <VBox fx:id="labels" alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
    </center>
+   <bottom>
+      <BorderPane BorderPane.alignment="CENTER">
+         <right>
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+              <items>
+                  <Button fx:id="next" contentDisplay="RIGHT" mnemonicParsing="false" text="Dalej" textAlignment="RIGHT" />
+                  <Button fx:id="check" mnemonicParsing="false" text="Sprawdź" textAlignment="RIGHT" />
+              </items>
+            </ToolBar>
+         </right>
+         <center>
+            <ToolBar BorderPane.alignment="CENTER">
+              <items>
+                  <Button fx:id="saveExit" mnemonicParsing="false" text="Zapisz i wyjdź" />
+                  <Button fx:id="exit" mnemonicParsing="false" text="Wyjdź" />
+                  <Label prefHeight="21.0" prefWidth="64.0" text="Postęp:">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <ProgressBar fx:id="progress" progress="0.0" />
+                  <Label fx:id="time" text="00:00:00" />
+                  <Label text="Ilość pytań:" textAlignment="CENTER">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="baseCounterLabel" text="0" />
+                  <Label text="&lt;" />
+                  <Label fx:id="showCountLabel" text="3" />
+                  <Label text="&gt;" />
+                  <Label text="Nauczone:" />
+                  <Label fx:id="learnedLabel" text="0" />
+              </items>
+            </ToolBar>
+         </center>
+      </BorderPane>
+   </bottom>
 </BorderPane>
